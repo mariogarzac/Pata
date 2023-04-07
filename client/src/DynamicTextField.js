@@ -1,10 +1,16 @@
-import { useState } from 'react'
+import React, {useState} from 'react'
 
 function DynamicTextField() {
   const [values, setValues] = useState([''])
+  
 
   const addField = () => {
     setValues([...values, ''])
+  }
+
+  const removeField = (indexP) => {
+    const newValue = values.filter((_, index) => index !== indexP);
+    setValues(newValue);
   }
 
   const handleChange = (index, value) => {
@@ -32,6 +38,7 @@ function DynamicTextField() {
           <label>
             Player {index + 1}:
             <input type="text" value={value} onChange={(event) => handleChange(index, event.target.value)} />
+            <button type="button" onClick={(event) => removeField(index)}>Remove player</button>
           </label>
         </div>
       ))}
